@@ -87,14 +87,14 @@ def _log_message(
     elif level == "warning":
         warnings.warn(message)
 
-    blocks = LocalContext.blocks.get()
-    event_id = LocalContext.event_id.get()
-    if blocks is not None and event_id is not None:
+    #blocks = LocalContext.blocks.get()
+    #event_id = LocalContext.event_id.get()
+    #if blocks is not None and event_id is not None:
         # Function called outside of Gradio if blocks is None
         # Or from /api/predict if event_id is None
-        blocks._queue.log_message(
-            event_id=event_id, log=message, level=level, duration=duration, visible=visible, *args, **xargs
-        )
+    #    blocks._queue.log_message(
+    #        event_id=event_id, log=message, level=level, duration=duration, visible=visible, *args, **xargs
+    #    )
 
 
 import gradio.helpers
@@ -1644,22 +1644,22 @@ if __name__ == "__main__":
     init_models()
     demo = init_blocks()
 
-    # for input_path in ["./data/examples/bunny.glb"]:
-    #     for _ in _pipeline(
-    #         input_path,
-    #         is_gs=False,
-    #         opacity_threshold=0.01,
-    #         no_fingers=True,
-    #         rest_pose_type="No",
-    #         ignore_pose_parts=["Head"],
-    #         input_normal=False,
-    #         bw_fix=True,
-    #         bw_vis_bone="Head",
-    #         reset_to_rest=True,
-    #         animation_file="./data/Standard Run.fbx",
-    #         retarget=True,
-    #         inplace=True,
-    #     ):
-    #         pass
+    for input_path in ["./data/examples/bunny.glb"]:
+        for _ in _pipeline(
+            input_path,
+            is_gs=False,
+            opacity_threshold=0.01,
+            no_fingers=True,
+            rest_pose_type="No",
+            ignore_pose_parts=["Head"],
+            input_normal=False,
+            bw_fix=True,
+            bw_vis_bone="Head",
+            reset_to_rest=True,
+            animation_file="./data/Standard Run.fbx",
+            retarget=True,
+            inplace=True,
+        ):
+            pass
 
-    demo.launch(server_name="0.0.0.0", server_port=7860, allowed_paths=[".", ".."], show_error=True, ssr_mode=False)
+    #demo.launch(server_name="0.0.0.0", server_port=7860, allowed_paths=[".", ".."], show_error=True, ssr_mode=False)
